@@ -1,0 +1,10 @@
+git init
+git clone = recuperer pr la premiere fois
+git pull origin master = update, récuperer
+git push origin master = upload
+git remote add origin url = tous les push et pull -> url donné
+git remote -v = tester connexion
+git add [nom du fichier] = creer un fichier
+git add --all -f = forcer l'envoi de nv fichier
+git commit -m "version2.0" = version
+
