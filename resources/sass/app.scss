@@ -13,9 +13,18 @@ $fa-font-path: "../webfonts";
 @import "~@fortawesome/fontawesome-free/css/solid.css";
 @import "~@fortawesome/fontawesome-free/css/brands.css";
 
+@import "~admin-lte/dist/css/AdminLTE.css";
+@import "~admin-lte/dist/css/AdminLTE.min.css";
+
+
 .navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.router-link-exact-active{
+    background-color: goldenrod;
+    color: #ffffff !important;
 }
 
 /*!

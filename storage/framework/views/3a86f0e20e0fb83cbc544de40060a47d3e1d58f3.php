@@ -12,7 +12,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <title>Luxury Way</title>
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <link rel="stylesheet" href="/css/app.css">
-    <!--<script src="/js/app.js"></script>-->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper" id="app">
@@ -105,6 +105,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         </ul>
                     </li>
+                    <li class="nav-item">
+                        <router-link to="/users" class="nav-link">
+                            <i class="fas fa-users nav-icon"></i>
+                            <p>Users</p>
+                        </router-link>
+                    </li>
+
 
                     <li class="nav-item">
                         <router-link to="/developer" class="nav-link">
@@ -135,7 +142,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </p>
                         </a>
 
-                        <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                        <form id="logout-form" action="<?php echo e(route('admin.logout')); ?>" method="POST" style="display: none;">
 
                         </form>
                     </li>
