@@ -1,13 +1,51 @@
 <template>
+
     <div class="container">
         <div class="row mt-5">
             <div class="col-md-12">
+                <!--
+                <div class="col-md-6">
+
+
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Add New</h3>
+                        </div>
+                        <form @submit.prevent="creatUser" role="form">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input v-model="form.name" type="text" id="name" placeholder="Enter name" class="form-control" :class="{ 'is-invalid':form.errors.has('name')}">
+                                    <has-error :form="form" field="name"></has-error>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">email</label>
+                                    <input v-model="form.email" type="email" id="email" placeholder="Enter email" class="form-control" :class="{ 'is-invalid':form.errors.has('email')}">
+                                    <has-error :form="form" field="email"></has-error>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input v-model="form.password" type="password" id="password" placeholder="Enter password" class="form-control" :class="{ 'is-invalid':form.errors.has('password')}">
+                                    <has-error :form="form" field="password"></has-error>
+                                </div>
+
+                            </div>
+
+
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-success">Add New <i class="fas fa-user-plus fa-fw"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                -->
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Users Table</h3>
+                        <h1 class="card-title">Users Table</h1>
                         <div class="card-tools">
-                            <button class="btn btn-success" >Add New <i class="fas fa-user-plus fa-fw"></i></button>
+                            <button class="btn btn-success" @click="newModal">Add New <i class="fas fa-user-plus fa-fw"></i></button>
                         </div>
+                        <br>
 
                     </div>
                     <!-- /.card-header -->
@@ -22,21 +60,18 @@
                                 <th>Registered At</th>
                                 <th>Modify</th>
                             </tr>
-
-
-                            <tr v-for="user in users" :key="item.id">
-
-                                <td>ID</td>
-                                <td>name</td>
-                                <td>email</td>
+                            <tr v-for="user in users" :key="user.id"> <!-- ce qu'il y a dans l'objet users est stocké dans user -->
+                                <td>{{user.id}}</td>
+                                <td>{{user.name}}</td>
+                                <td>{{user.email}}</td>
                                 <td>Type</td>
-                                <td>00-00-00</td>
+                                <td>{{user.created_at | myDate}}</td>
                                 <td>
-                                    <a href="#" >
+                                    <a href="#" @click="editModal(user)">
                                         <i class="fa fa-edit blue"></i>
                                     </a>
                                     /
-                                    <a href="#" >
+                                    <a href="#" @click="deleteUser(user.id)">
                                         <i class="fa fa-trash red"></i>
                                     </a>
 
@@ -50,19 +85,21 @@
                 </div>
                 <!-- /.card -->
             </div>
-        </div>
+                <!-- /.box -->
+      </div>
+
         <!-- Modal -->
-        <div class="modal fade" id="addNew" tabindex="-1" role="dialog" aria-labelledby="addNewLabel" aria-hidden="true">
+        <div style="position: absolute" class="modal" id="addNew" tabindex="-1" role="dialog" aria-labelledby="addNewLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" v-show="!editmode" id="addNewLabel">Add New</h5>
-                        <h5 class="modal-title" v-show="editmode" id="addNewLabel">Update User's Info</h5>
+                        <h5 class="modal-title" v-show="editmode" id="addNewLabel">Update User</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form @submit.prevent="editmode ? updateUser() : createUser()">
+                    <form @submit.prevent="editmode ? updateUser() : creatUser()">
                         <div class="modal-body">
                             <div class="form-group">
                                 <input v-model="form.name" type="text" name="name"
@@ -79,24 +116,6 @@
                             </div>
 
                             <div class="form-group">
-                        <textarea v-model="form.bio" name="bio" id="bio"
-                                  placeholder="Short bio for user (Optional)"
-                                  class="form-control" :class="{ 'is-invalid': form.errors.has('bio') }"></textarea>
-                                <has-error :form="form" field="bio"></has-error>
-                            </div>
-
-
-                            <div class="form-group">
-                                <select name="type" v-model="form.type" id="type" class="form-control" :class="{ 'is-invalid': form.errors.has('type') }">
-                                    <option value="">Select User Role</option>
-                                    <option value="admin">Admin</option>
-                                    <option value="user">Standard User</option>
-                                    <option value="author">Author</option>
-                                </select>
-                                <has-error :form="form" field="type"></has-error>
-                            </div>
-
-                            <div class="form-group">
                                 <input v-model="form.password" type="password" name="password" id="password"
                                        class="form-control" :class="{ 'is-invalid': form.errors.has('password') }">
                                 <has-error :form="form" field="password"></has-error>
@@ -105,8 +124,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            <button v-show="editmode" type="submit" class="btn btn-success">Update</button>
                             <button v-show="!editmode" type="submit" class="btn btn-primary">Create</button>
+                            <button v-show="editmode" type="submit" class="btn btn-success">Update</button>
                         </div>
 
                     </form>
@@ -114,33 +133,116 @@
                 </div>
             </div>
         </div>
+
     </div>
+
+
+
 </template>
 
+
 <script>
+
+
     export default {
         data(){
             return {
+                editmode: true,
                 users : {},
                 form: new Form({
                     id : '',
                     name : '',
                     email : '',
+                    created_at : '',
                     password : ''
                 })
             }
         },
         methods: {
+            updateUser(){
+                this.$Progress.start();
+                this.form.put('api/user/'+this.form.id)
+                    .then(() => {
+
+                        swal.fire(
+                            'Updated!',
+                            'Informations has been updated.',
+                            'success'
+                        )
+                        this.$Progress.finish();
+                        })
+                    .catch(() => {
+                        this.$Progress.fail();
+                        });
+
+            },
+            editModal(user){
+                this.editmode = true;
+                this.form.reset();
+                $("#addNew").modal("show");
+                this.form.fill(user);
+            },
+            newModal(){
+                this.editmode = false;
+                this.form.reset();
+                $("#addNew").modal("show");
+            },
+            deleteUser(id){
+                swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+
+                    // Send request to the server
+                    if (result.value){
+                        this.form.delete('api/user/'+id).then(()=>{
+                            swal.fire(
+                                'Deleted!',
+                                'The user has been deleted.',
+                                'success'
+                            )
+                        }).catch(()=>{
+                            swal("Failed!", "User not deleted", "warning");
+                        });
+                    }
+
+
+
+                })
+            },
             loadUsers(){
-                axios.get("api/user").then(({ data }) => (this.users = data));
+                axios.get("api/user").then(({ data }) => (this.users = data.data));
             },
             creatUser(){
-                this.form.post('api/user');
+                this.$Progress.start();
+                this.form.post('api/user')
+                .then(()=>{
+
+                    Toast.fire({
+                        type: 'success',
+                        title: 'User created successfully'
+                    })
+                    this.$Progress.finish();
+                })
+                    .catch(()=>{
+                        Toast.fire({
+                            type: 'error',
+                            title: 'User not created'
+                        })
+                    })
+
             }
         },
 
         created(){
             this.loadUsers();
+            setInterval(() => this.loadUsers(), 3000);
         }
     }
 </script>
+

@@ -14408,7 +14408,7 @@ a.close.disabled {
   background-color: #000;
 }
 .modal-backdrop.fade {
-  opacity: 0;
+  opacity: 1;
 }
 .modal-backdrop.show {
   opacity: 0.5;
@@ -24223,7 +24223,7 @@ button.close, button.mailbox-attachment-close {
 }
 
 .modal-backdrop.fade {
-  opacity: 0;
+  opacity: 0.5 !important;
 }
 
 .modal-backdrop.show {

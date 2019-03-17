@@ -8,6 +8,25 @@
 require('./bootstrap');
 require('admin-lte');
 
+import VueProgressBar from 'vue-progressbar'
+Vue.use(VueProgressBar, {
+    color: 'rgb(143, 255, 199)',
+    failedColor: 'red',
+    height: '3px'
+});
+
+import swal from 'sweetalert2'
+window.swal = swal;
+
+const Toast = swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000
+});
+
+window.Toast = Toast;
+
 window.Vue = require('vue');
 import { Form, HasError, AlertError } from 'vform';
 
@@ -19,6 +38,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
+import moment from 'moment';
 
 const routes = [
     { path: '/dashboard', component: require('./components/Dashboard.vue').default },
@@ -28,6 +48,14 @@ const routes = [
 
 const router = new VueRouter({
     routes
+});
+
+Vue.filter('upText', function (text) {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+});
+
+Vue.filter('myDate', function(created_at){
+    return moment(created_at).format('MMMM Do YYYY');
 });
 
 /**
@@ -54,4 +82,6 @@ const app = new Vue({
     el: '#app',
     router
 });
+
+
 
