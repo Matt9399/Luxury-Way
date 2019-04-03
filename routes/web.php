@@ -11,8 +11,26 @@
 |
 */
 
+// Début include
+
+use App\Product;
+
+// Fin include
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+});
+/*
+Route::get('/shop', function () {
+    return view('shop.index');
+});*/
+Route::get('/shop', function () {
+    $products = Product::all();
+    return View::make("shop.index")->with("allProducts", $products);
+});
+
+Route::get('/course', function () {
+    return view('course.index');
 });
 
 Auth::routes();
@@ -34,5 +52,6 @@ Route::prefix('admin')->group(function(){
     Route::get('/', 'AdminController@index')->name('admin.dashboard');
     Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 });
+
 
 

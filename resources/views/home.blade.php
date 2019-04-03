@@ -16,9 +16,11 @@
 
                     @component('components.who')
                     @endcomponent
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection

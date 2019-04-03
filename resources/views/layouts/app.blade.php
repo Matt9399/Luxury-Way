@@ -11,14 +11,23 @@
     <title>Luxury Way</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{{ asset('js/app.js') }}" ></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        /* Set the size of the div element that contains the map */
+        #map {
+            height: 400px;  /* The height is 400 pixels */
+            width: 400px;  /* The width is the width of the web page */
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -41,6 +50,16 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/shop">{{ __('Services') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/course">{{ __('Course') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}"><i class="fas fa-shopping-cart"></i> {{ __('Cart') }}</a>
+                            </li>
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -57,6 +76,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">
+                                        {{ __('Profile') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -73,10 +95,10 @@
                 </div>
             </div>
         </nav>
-
         <main class="py-4">
             @yield('content')
         </main>
     </div>
 </body>
 </html>
+

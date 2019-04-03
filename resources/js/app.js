@@ -43,7 +43,8 @@ import moment from 'moment';
 const routes = [
     { path: '/dashboard', component: require('./components/Dashboard.vue').default },
     { path: '/profile', component: require('./components/Profile.vue').default },
-    { path: '/users', component: require('./components/Users.vue').default }
+    { path: '/users', component: require('./components/Users.vue').default },
+    { path: '/products', component: require('./components/Products.vue').default }
 ];
 
 const router = new VueRouter({

@@ -3,42 +3,6 @@
     <div class="container">
         <div class="row mt-5">
             <div class="col-md-12">
-                <!--
-                <div class="col-md-6">
-
-
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Add New</h3>
-                        </div>
-                        <form @submit.prevent="creatUser" role="form">
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input v-model="form.name" type="text" id="name" placeholder="Enter name" class="form-control" :class="{ 'is-invalid':form.errors.has('name')}">
-                                    <has-error :form="form" field="name"></has-error>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">email</label>
-                                    <input v-model="form.email" type="email" id="email" placeholder="Enter email" class="form-control" :class="{ 'is-invalid':form.errors.has('email')}">
-                                    <has-error :form="form" field="email"></has-error>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <input v-model="form.password" type="password" id="password" placeholder="Enter password" class="form-control" :class="{ 'is-invalid':form.errors.has('password')}">
-                                    <has-error :form="form" field="password"></has-error>
-                                </div>
-
-                            </div>
-
-
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-success">Add New <i class="fas fa-user-plus fa-fw"></i></button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                -->
                 <div class="card">
                     <div class="card-header">
                         <h1 class="card-title">Users Table</h1>

@@ -11,14 +11,23 @@
     <title>Luxury Way</title>
 
     <!-- Scripts -->
-    <script src="<?php echo e(asset('js/app.js')); ?>" defer></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="<?php echo e(asset('js/app.js')); ?>" ></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
     <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
+
+    <style>
+        /* Set the size of the div element that contains the map */
+        #map {
+            height: 400px;  /* The height is 400 pixels */
+            width: 400px;  /* The width is the width of the web page */
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -41,6 +50,16 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/shop"><?php echo e(__('Services')); ?></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/course"><?php echo e(__('Course')); ?></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?php echo e(route('login')); ?>"><i class="fas fa-shopping-cart"></i> <?php echo e(__('Cart')); ?></a>
+                            </li>
                         <?php if(auth()->guard()->guest()): ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo e(route('login')); ?>"><?php echo e(__('Login')); ?></a>
@@ -57,6 +76,10 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">
+                                        <?php echo e(__('Profile')); ?>
+
+                                    </a>
                                     <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -74,10 +97,10 @@
                 </div>
             </div>
         </nav>
-
         <main class="py-4">
             <?php echo $__env->yieldContent('content'); ?>
         </main>
     </div>
 </body>
 </html>
+
