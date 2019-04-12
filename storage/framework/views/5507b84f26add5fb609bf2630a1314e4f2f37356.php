@@ -1,17 +1,16 @@
-@extends('layouts.appReservation')
-
-@section('title')
+<?php $__env->startSection('title'); ?>
     Luxury Way Shop
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container">
     <div id="floating-panel">
     </div>
     <div id="map"></div>
-    <form action="{{ url('course') }}" method="POST">
-        {{ csrf_field() }}
-        <strong>Startre:</strong>
+    <form action="<?php echo e(url('course')); ?>" method="POST">
+        <?php echo e(csrf_field()); ?>
+
+        <strong>Start:</strong>
         <input class="form-control" width="200" type="text" name="start" id="start">
         <strong>End:</strong>
         <input class="form-control" type="text" name="end" id="end">
@@ -34,5 +33,7 @@
     ?>
 
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
+
+<?php echo $__env->make('layouts.appReservation', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
