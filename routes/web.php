@@ -27,11 +27,44 @@ Route::get('/shop', function () {
 Route::get('/shop', function () {
     $products = Product::all();
     return View::make("shop.index")->with("allProducts", $products);
+})->name('shop');
+
+Route::get('/add-to-cart/{id}', [
+    'uses' => 'API\ProductController@getAddToCart',
+    'as' => 'product.addToCart'
+]);
+
+Route::get('/del-to-cart/{id}', [
+    'uses' => 'API\ProductController@getDelCart',
+    'as' => 'product.delCart'
+]);
+
+Route::get('/shopping-cart', [
+    'uses' => 'API\ProductController@getCart',
+    'as' => 'product.shoppingCart'
+]);
+
+Route::get('/checkout', [
+    'uses' => 'API\ProductController@getCheckout',
+    'as' => 'checkout'
+]);
+
+Route::post('/checkout', [
+    'uses' => 'API\ProductController@postCheckout',
+    'as' => 'checkout'
+]);
+
+
+Route::prefix('course')->group(function(){
+    Route::get('/', function () {
+        return view('course.index');
+    });
+    Route::get('/info', function () {
+        return view('course.info');
+    });
+    Route::post('/', 'ReservationController@suiteInfo');
 });
 
-Route::get('/course', function () {
-    return view('course.index');
-});
 
 Auth::routes();
 

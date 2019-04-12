@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Session;
+use App\Cart;
 
 class ProductController extends Controller
 {
@@ -88,5 +90,46 @@ class ProductController extends Controller
         $product->delete();
 
         return ['message' => 'Product Deleted'];
+    }
+
+    public function getAddToCart(Request $request, $id) {
+        $product = Product::find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->add($product, $product->id);
+
+        $request->session()->put('cart', $cart);
+        return redirect()->route('shop');
+    }
+
+    public function getDelCart(Request $request, $id) {
+        $product = Product::find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->del($product, $product->id);
+
+        $request->session()->put('cart', $cart);
+        return redirect()->route('product.shoppingCart');
+    }
+
+    public function getCart() {
+        if (!Session::has('cart')) {
+            return view('shop.shopping-cart');
+        }
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        return view('shop.shopping-cart', ['products' => $cart->items,
+            'totalPrice' => $cart->totalPrice]);
+
+    }
+
+    public function getCheckout() {
+        if (!Session::has('cart')) {
+            return view('shop.shopping-cart');
+        }
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        $total = $cart->totalPrice;
+        return view('shop.checkout', ['total' => $total]);
     }
 }

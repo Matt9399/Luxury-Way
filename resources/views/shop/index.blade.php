@@ -16,7 +16,7 @@
                                 <p class="card-text description">{{ $product->description }}</p>
                                 <div class="pull-right price"><strong>{{ $product->price }} €</strong></div>
                                 <br>
-                                <a href="#" class="btn btn-warning pull-right">Add to cart</a>
+                                <a href="{{ route('product.addToCart', ['id' => $product->id]) }}" class="btn btn-warning pull-right">Add to cart</a>
                             </div>
                         </div>
                     </div>

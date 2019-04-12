@@ -14,7 +14,7 @@
                                 <p class="card-text description"><?php echo e($product->description); ?></p>
                                 <div class="pull-right price"><strong><?php echo e($product->price); ?> €</strong></div>
                                 <br>
-                                <a href="#" class="btn btn-warning pull-right">Add to cart</a>
+                                <a href="<?php echo e(route('product.addToCart', ['id' => $product->id])); ?>" class="btn btn-warning pull-right">Add to cart</a>
                             </div>
                         </div>
                     </div>

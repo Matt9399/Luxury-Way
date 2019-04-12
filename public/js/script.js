@@ -1,3 +1,9 @@
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
 function initMap() {
     var directionsDisplay = new google.maps.DirectionsRenderer;
     var directionsService = new google.maps.DirectionsService;
@@ -13,7 +19,7 @@ function initMap() {
     control.style.display = 'block';
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
 
-    document.getElementById('submit').addEventListener('click', function() {
+    document.getElementById('simulate').addEventListener('click', function() {
         calculateAndDisplayRoute(directionsService, directionsDisplay);
     });
     document.getElementById('start').addEventListener('change', onChangeHandler);
@@ -45,10 +51,14 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
                 summaryPanel.innerHTML += route.legs[i].distance.text + '<br>';
                 summaryPanel.innerHTML += route.legs[i].duration.text + '<br>';
                 summaryPanel.innerHTML += 'Prix ' + resultPrice.toFixed(2) + ' €';
+                document.getElementById("price").value = resultPrice.toFixed(2);
+                document.getElementById("distance").value = route.legs[i].distance.value;
+                document.getElementById("duration").value = route.legs[i].duration.value;
+                document.getElementById("distance_text").value = route.legs[i].distance.text;
+                document.getElementById('submit').type = 'submit';
             }
         } else {
             window.alert('Directions request failed due to ' + status);
         }
     });
 }
-

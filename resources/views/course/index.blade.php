@@ -9,14 +9,30 @@
     <div id="floating-panel">
     </div>
     <div id="map"></div>
-    <strong>Start:</strong>
-    <input class="form-control" width="200" id="start" type="textbox" value="Paris">
-    <strong>End:</strong>
-    <input class="form-control" id="end" type="textbox" value="Noisy le Grand">
-    <br>
-    <input class="btn btn-primary" id="submit" type="button" value="Simulate">
-    <br>
-    <div id="directions-panel"></div>
+    <form action="{{ url('course') }}" method="POST">
+        {{ csrf_field() }}
+        <strong>Start:</strong>
+        <input class="form-control" width="200" type="text" name="start" id="start">
+        <strong>End:</strong>
+        <input class="form-control" type="text" name="end" id="end">
+        <strong>Date:</strong>
+        <input class="form-control" type="datetime-local" name="date" id="date">
+        <!-- Pass data -->
+        <input class="form-control" readonly type="hidden" name="price" id="price">
+        <input class="form-control" readonly type="hidden" name="distance" id="distance">
+        <input class="form-control" readonly type="hidden" name="duration" id="duration">
+        <input class="form-control" readonly type="hidden" name="distance_text" id="distance_text">
+        <br>
+        <input class="btn btn-primary" id="simulate" type="button" value="Simulate">
+        <input class="btn btn-success" type="hidden" id="submit" value="Next">
+        <br>
+        <div id="directions-panel"></div>
+    </form>
+
+    <?php
+       echo "<script>document.writeln(resultPrice);</script>";
+    ?>
+
 </div>
 @endsection
 
