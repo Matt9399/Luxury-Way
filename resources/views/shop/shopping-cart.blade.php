@@ -95,30 +95,52 @@ Luxury Way Shopping Cart
                 -->
                 @foreach($products as $product)
                     @if($product['qty'] > 0)
-                        <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
-                            <h4 class="product-name"><strong>{{ $product['item']['title'] }}</strong></h4>
-                            <h4>
-                                <small>{{ $product['item']['description'] }}</small>
-                            </h4>
-                        </div>
-                        <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
-                            <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
-                                <h6><strong>{{ $product['price'] }} <span class="text-muted">€</span></strong></h6>
+                        @if(isset($product['item']['description']))
+                            <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+                                <h4 class="product-name"><strong>{{ $product['item']['title'] }}</strong></h4>
+                                <h4>
+                                    <small>{{ $product['item']['description'] }}</small>
+                                </h4>
                             </div>
-                            <div class="col-4 col-sm-4 col-md-4">
-                                <div class="quantity">
-                                    <input type="button" onclick="window.location.href = '{{ route('product.addToCart', ['id' => $product['item']]) }}';" value="+" class="plus">
-                                    <input type="text" readonly step="1" max="99" min="1" value="{{ $product['qty'] }}" title="Qty" class="qty"
-                                           size="4">
-                                    <input onclick="window.location.href = '{{ route('product.delCart', ['id' => $product['item']]) }}';" type="button" value="-" class="minus">
+                            <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
+                                <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
+                                    <h6><strong>{{ $product['price'] }} <span class="text-muted">€</span></strong></h6>
+                                </div>
+                                <div class="col-4 col-sm-4 col-md-4">
+                                    <div class="quantity">
+                                        <input type="button" onclick="window.location.href = '{{ route('product.addToCart', ['id' => $product['item']]) }}';" value="+" class="plus">
+                                        <input type="text" readonly step="1" max="99" min="1" value="{{ $product['qty'] }}" title="Qty" class="qty"
+                                               size="4">
+                                        <input onclick="window.location.href = '{{ route('product.delCart', ['id' => $product['item']]) }}';" type="button" value="-" class="minus">
+                                    </div>
+                                </div>
+                                <div class="col-2 col-sm-2 col-md-2 text-right">
+                                    <button onclick="window.location.href = '{{ route('product.delCart', ['id' => $product['item']]) }}'" type="button" class="btn btn-outline-danger btn-xs">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
                                 </div>
                             </div>
-                            <div class="col-2 col-sm-2 col-md-2 text-right">
-                                <button onclick="window.location.href = '{{ route('product.delCart', ['id' => $product['item']]) }}'" type="button" class="btn btn-outline-danger btn-xs">
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </button>
+                        @else
+                            <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+                                <h4 class="product-name"><strong>Course</strong></h4>
+                                <h4>
+                                    <small>Start : {{ $product['item']['address_start'] }}</small>
+                                </h4>
+                                <h4>
+                                    <small>Arrival : {{ $product['item']['address_arrival'] }}</small>
+                                </h4>
                             </div>
-                        </div>
+                            <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
+                                <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
+                                    <h6><strong>{{ $product['item']['price'] }} <span class="text-muted">€</span></strong></h6>
+                                </div>
+                                <div class="col-2 col-sm-2 col-md-2 text-right">
+                                    <button onclick="window.location.href = '{{ route('reservation.delCart', ['id' => $product['item']]) }}'" type="button" class="btn btn-outline-danger btn-xs">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        @endif
                     @endif
                 @endforeach
             </div>

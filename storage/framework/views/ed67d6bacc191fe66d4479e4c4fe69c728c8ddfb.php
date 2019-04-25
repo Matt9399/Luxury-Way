@@ -130,7 +130,7 @@
                                 <a class="nav-link" href="/course"><?php echo e(__('Course')); ?></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo e(route('login')); ?>"><i class="fas fa-shopping-cart"></i> <?php echo e(__('Cart')); ?></a>
+                                <a class="nav-link" href="<?php echo e(route('login')); ?>"><i class="fas fa-shopping-cart"></i> <?php echo e(__('Cart')); ?><span class="badge"><?php echo e(Session::has('cart') ? Session::get('cart')->totalQty : ''); ?></span></a>
                             </li>
                         <?php if(auth()->guard()->guest()): ?>
                             <li class="nav-item">

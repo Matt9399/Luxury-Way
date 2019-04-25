@@ -120,7 +120,6 @@ class ProductController extends Controller
         $cart = new Cart($oldCart);
         return view('shop.shopping-cart', ['products' => $cart->items,
             'totalPrice' => $cart->totalPrice]);
-
     }
 
     public function getCheckout() {

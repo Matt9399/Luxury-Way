@@ -130,7 +130,7 @@
                                 <a class="nav-link" href="/course">{{ __('Course') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}"><i class="fas fa-shopping-cart"></i> {{ __('Cart') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}"><i class="fas fa-shopping-cart"></i> {{ __('Cart') }}<span class="badge">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</span></a>
                             </li>
                         @guest
                             <li class="nav-item">

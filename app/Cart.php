@@ -38,6 +38,7 @@ class Cart
         $this->totalPrice += $item->price;
     }
 
+
     public function del($item, $id){
         $storedItem = ['qty' => 0, 'price' => $item->price, 'item' => $item]; // Tableau associatif
         if ($this->items){

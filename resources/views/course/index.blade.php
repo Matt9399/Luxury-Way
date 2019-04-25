@@ -21,6 +21,7 @@
         <input class="form-control" readonly type="hidden" name="price" id="price">
         <input class="form-control" readonly type="hidden" name="distance" id="distance">
         <input class="form-control" readonly type="hidden" name="duration" id="duration">
+        <input class="form-control" readonly type="hidden" name="duration_text" id="duration_text">
         <input class="form-control" readonly type="hidden" name="distance_text" id="distance_text">
         <br>
         <input class="btn btn-primary" id="simulate" type="button" value="Simulate">
