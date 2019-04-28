@@ -93,30 +93,52 @@ Luxury Way Shopping Cart
                 -->
                 <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <?php if($product['qty'] > 0): ?>
-                        <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
-                            <h4 class="product-name"><strong><?php echo e($product['item']['title']); ?></strong></h4>
-                            <h4>
-                                <small><?php echo e($product['item']['description']); ?></small>
-                            </h4>
-                        </div>
-                        <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
-                            <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
-                                <h6><strong><?php echo e($product['price']); ?> <span class="text-muted">€</span></strong></h6>
+                        <?php if(isset($product['item']['description'])): ?>
+                            <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+                                <h4 class="product-name"><strong><?php echo e($product['item']['title']); ?></strong></h4>
+                                <h4>
+                                    <small><?php echo e($product['item']['description']); ?></small>
+                                </h4>
                             </div>
-                            <div class="col-4 col-sm-4 col-md-4">
-                                <div class="quantity">
-                                    <input type="button" onclick="window.location.href = '<?php echo e(route('product.addToCart', ['id' => $product['item']])); ?>';" value="+" class="plus">
-                                    <input type="text" readonly step="1" max="99" min="1" value="<?php echo e($product['qty']); ?>" title="Qty" class="qty"
-                                           size="4">
-                                    <input onclick="window.location.href = '<?php echo e(route('product.delCart', ['id' => $product['item']])); ?>';" type="button" value="-" class="minus">
+                            <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
+                                <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
+                                    <h6><strong><?php echo e($product['price']); ?> <span class="text-muted">€</span></strong></h6>
+                                </div>
+                                <div class="col-4 col-sm-4 col-md-4">
+                                    <div class="quantity">
+                                        <input type="button" onclick="window.location.href = '<?php echo e(route('product.addToCart', ['id' => $product['item']])); ?>';" value="+" class="plus">
+                                        <input type="text" readonly step="1" max="99" min="1" value="<?php echo e($product['qty']); ?>" title="Qty" class="qty"
+                                               size="4">
+                                        <input onclick="window.location.href = '<?php echo e(route('product.delCart', ['id' => $product['item']])); ?>';" type="button" value="-" class="minus">
+                                    </div>
+                                </div>
+                                <div class="col-2 col-sm-2 col-md-2 text-right">
+                                    <button onclick="window.location.href = '<?php echo e(route('product.delCart', ['id' => $product['item']])); ?>'" type="button" class="btn btn-outline-danger btn-xs">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
                                 </div>
                             </div>
-                            <div class="col-2 col-sm-2 col-md-2 text-right">
-                                <button onclick="window.location.href = '<?php echo e(route('product.delCart', ['id' => $product['item']])); ?>'" type="button" class="btn btn-outline-danger btn-xs">
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </button>
+                        <?php else: ?>
+                            <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+                                <h4 class="product-name"><strong>Course</strong></h4>
+                                <h4>
+                                    <small>Start : <?php echo e($product['item']['address_start']); ?></small>
+                                </h4>
+                                <h4>
+                                    <small>Arrival : <?php echo e($product['item']['address_arrival']); ?></small>
+                                </h4>
                             </div>
-                        </div>
+                            <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
+                                <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
+                                    <h6><strong><?php echo e($product['item']['price']); ?> <span class="text-muted">€</span></strong></h6>
+                                </div>
+                                <div class="col-2 col-sm-2 col-md-2 text-right">
+                                    <button onclick="window.location.href = '<?php echo e(route('reservation.delCart', ['id' => $product['item']])); ?>'" type="button" class="btn btn-outline-danger btn-xs">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        <?php endif; ?>
                     <?php endif; ?>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>

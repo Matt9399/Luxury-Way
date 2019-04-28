@@ -6,7 +6,7 @@
 <div class="container">
     <div id="floating-panel">
     </div>
-    <div id="map"></div>
+    <div id="map" style="margin: 0 auto;"></div>
     <form action="<?php echo e(url('course')); ?>" method="POST">
         <?php echo e(csrf_field()); ?>
 
@@ -20,9 +20,10 @@
         <input class="form-control" readonly type="hidden" name="price" id="price">
         <input class="form-control" readonly type="hidden" name="distance" id="distance">
         <input class="form-control" readonly type="hidden" name="duration" id="duration">
+        <input class="form-control" readonly type="hidden" name="duration_text" id="duration_text">
         <input class="form-control" readonly type="hidden" name="distance_text" id="distance_text">
         <br>
-        <input class="btn btn-primary" id="simulate" type="button" value="Simulate">
+        <input class="btn btn-warning" id="simulate" type="button" value="Simulate">
         <input class="btn btn-success" type="hidden" id="submit" value="Next">
         <br>
         <div id="directions-panel"></div>

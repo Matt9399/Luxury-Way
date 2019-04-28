@@ -39,6 +39,11 @@ Route::get('/del-to-cart/{id}', [
     'as' => 'product.delCart'
 ]);
 
+Route::get('/del-to-cart2/{id}', [
+    'uses' => 'ReservationController@getDelCart',
+    'as' => 'reservation.delCart'
+]);
+
 Route::get('/shopping-cart', [
     'uses' => 'API\ProductController@getCart',
     'as' => 'product.shoppingCart'
@@ -54,7 +59,6 @@ Route::post('/checkout', [
     'as' => 'checkout'
 ]);
 
-
 Route::prefix('course')->group(function(){
     Route::get('/', function () {
         return view('course.index');
@@ -63,8 +67,12 @@ Route::prefix('course')->group(function(){
         return view('course.info');
     });
     Route::post('/', 'ReservationController@suiteInfo');
+    Route::post('/info', 'ReservationController@store');
+    Route::get('/add-to-cart/{id_utilisateur}', [
+        'uses' => 'ReservationController@getAddToCart',
+        'as' => 'reservation.addToCart'
+    ]);
 });
-
 
 Auth::routes();
 
@@ -86,5 +94,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 });
 
-
+Route::get('/collab', 'CollabController@index')->name('collab.dashboard');
+Route::get('/collab/login', 'Auth\CollabLoginController@showLoginForm')->name('collab.login');
+Route::post('/collab/login', 'Auth\CollabLoginController@login')->name('collab.login.submit');
 

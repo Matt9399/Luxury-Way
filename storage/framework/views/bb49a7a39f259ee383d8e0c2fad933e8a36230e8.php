@@ -21,6 +21,7 @@
 
     <!-- Styles -->
     <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('css/style.css')); ?>" rel="stylesheet">
 
     <style>
         /* Always set the map height explicitly to define the size of the div
@@ -30,6 +31,8 @@
         }
         /* Optional: Makes the sample page fill the window. */
         html, body {
+            background-color: #383838;
+            color: darkgrey;
             height: 100%;
             margin: 0;
             padding: 0;
@@ -130,7 +133,7 @@
                                 <a class="nav-link" href="/course"><?php echo e(__('Course')); ?></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo e(route('login')); ?>"><i class="fas fa-shopping-cart"></i> <?php echo e(__('Cart')); ?></a>
+                                <a class="nav-link" href="<?php echo e(route('login')); ?>"><i class="fas fa-shopping-cart"></i> <?php echo e(__('Cart')); ?><span class="badge"><?php echo e(Session::has('cart') ? Session::get('cart')->totalQty : ''); ?></span></a>
                             </li>
                         <?php if(auth()->guard()->guest()): ?>
                             <li class="nav-item">

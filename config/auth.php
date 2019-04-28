@@ -50,10 +50,19 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+        'collab' => [
+            'driver' => 'session',
+            'provider' => 'collabs',
+        ],
         'admin-api' => [
             'driver' => 'token',
             'provider' => 'admins',
         ],
+        'collab-api' => [
+            'driver' => 'token',
+            'provider' => 'collabs',
+        ],
+
     ],
 
     /*
@@ -81,6 +90,10 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Admin::class,
+        ],
+        'collabs' => [
+            'driver' => 'eloquent',
+            'model' => App\Collabs::class,
         ],
 
         // 'users' => [
@@ -112,6 +125,11 @@ return [
         ],
         'admins' => [
             'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'collans' => [
+            'provider' => 'collabs',
             'table' => 'password_resets',
             'expire' => 60,
         ],

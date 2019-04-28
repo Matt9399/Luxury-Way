@@ -53,6 +53,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
                 summaryPanel.innerHTML += 'Prix ' + resultPrice.toFixed(2) + ' €';
                 document.getElementById("price").value = resultPrice.toFixed(2);
                 document.getElementById("distance").value = route.legs[i].distance.value;
+                document.getElementById("duration_text").value = route.legs[i].duration.text;
                 document.getElementById("duration").value = route.legs[i].duration.value;
                 document.getElementById("distance_text").value = route.legs[i].distance.text;
                 document.getElementById('submit').type = 'submit';

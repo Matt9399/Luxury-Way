@@ -5,9 +5,9 @@ Luxury Way Checkout
 @endsection
 
 @section('content')
-    <div class="container">
+    <div class="container" style="color: lightgrey; ">
         <div class="row">
-            <div class="col-sm-6 col-md-4 d-flex align-items-stretch">
+            <div class="col-sm-6 col-md-4 col-md-offset-4 "style="margin: 0 auto;">
                 <h1>Checkout</h1>
                 <h4>Your total: {{ $total }}€</h4>
                 <div class="container">
@@ -45,6 +45,13 @@ Luxury Way Checkout
                                             <input type="text" id="card-expiry-month" class="form-control" required>
                                         </div>
                                     </div>
+
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <label for="card-expiry-year">Expiration Year</label>
+                                            <input type="text" id="card-expiry-year" class="form-control" required>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-xs-12">
@@ -54,11 +61,17 @@ Luxury Way Checkout
                                 </div>
                             </div>
                         </div>
+
                         {{ csrf_field() }}
-                        <button type="submit" class="btn btn-success">Buy now</button>
+                        <button type="submit" class="btn btn-warning">Buy now</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+@endsection
+@section('scripts')
+<script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+<script type="text/javascript" src="{{ URL::to('js/checkout.js')}}"></script>
 @endsection

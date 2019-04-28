@@ -20,8 +20,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     <style>
+
         /* Set the size of the div element that contains the map */
         #map {
             height: 400px;  /* The height is 400 pixels */
@@ -29,11 +31,11 @@
         }
     </style>
 </head>
-<body>
+<body style="background-color: #383838">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <nav class="navbar navbar-expand-xl navbar-light navbar-laravel">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand"href="{{ url('/') }}">
                     <!--{{ config('app.name', 'Luxury Way') }}-->
                     Luxury Way
                 </a>
